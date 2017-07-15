@@ -1,0 +1,21 @@
+{
+  "name": "multi-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "node ./scripts/deploy.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^8.0.13",
+    "awesome-typescript-loader": "^3.2.1",
+    "serverless-webpack": "^2.0.0",
+    "typescript": "^2.4.1",
+    "webpack": "^3.2.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.85.0"
+  }
+}

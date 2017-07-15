@@ -1,0 +1,38 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "declaration": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "moduleResolution": "node",
+        "module": "commonjs",
+        "sourceMap": true,
+        "preserveConstEnums": true,
+        "target": "es5",
+        "lib": [
+            "es5",
+            "es2015.collection",
+            "es2015.promise",
+            "es2015.iterable",
+            "es2015.core"
+        ],
+        "rootDir": "./",
+        "types": [
+            "node"
+        ],
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "*": [
+                "./types/*"
+            ]
+        }
+    }
+}

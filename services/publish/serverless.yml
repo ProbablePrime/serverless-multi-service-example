@@ -1,0 +1,40 @@
+service: multiservice-publish
+plugins:
+    - serverless-webpack
+
+provider:
+    name: aws
+    runtime: nodejs6.10
+    iamRoleStatements:
+        - Effect: Allow
+          Action:
+            - SNS:*
+          Resource: "*"
+
+custom:
+    stage: ${opt:stage, self:provider.stage}
+    region: ${opt:region, self:provider.region}
+    webpackIncludeModules:
+        packagePath: '../../package.json'
+    webpack: ../../webpack.config.js
+
+functions:
+    publish:
+        handler: handler.publish
+        memorySize: 512
+        environment:
+            SNS_ARN:
+                Ref: snsTopic
+resources:
+    Resources:
+        snsTopic:
+            Type: AWS::SNS::Topic
+            Properties:
+                TopicName: ${self:service}-${self:custom.stage}-snsTopic
+    Outputs:
+        snsTopic:
+            Description: The ARN for the exported sns topic
+            Value:
+                Ref: snsTopic
+            Export:
+                Name: ${self:service}:${self:custom.stage}:SNSTopicArn

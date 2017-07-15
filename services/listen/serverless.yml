@@ -1,0 +1,28 @@
+service: multiservice-listen
+plugins:
+    - serverless-webpack
+
+provider:
+    name: aws
+    runtime: nodejs6.10
+    iamRoleStatements:
+        - Effect: Allow
+          Action:
+            - SNS:*
+          Resource: "*"
+
+custom:
+    stage: ${opt:stage, self:provider.stage}
+    region: ${opt:region, self:provider.region}
+    webpackIncludeModules:
+        packagePath: '../../package.json'
+    webpack: ../../webpack.config.js
+
+functions:
+    listen:
+        handler: handler.listen
+        memorySize: 512
+        events:
+            - sns:
+                arn: ${cf:multiservice-publish-dev.snsTopic}
+
